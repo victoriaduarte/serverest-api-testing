@@ -43,7 +43,6 @@ Realizar requisição para listar usuários cadastrados
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-    
 A API deve responder com código 200 e listar usuários cadastrados
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -54,7 +53,6 @@ Realizar requisição para listar usuários administradores
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=administrador=true
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários administradores
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -69,7 +67,6 @@ Realizar requisição para listar usuários não administradores
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=administrador=false
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários não administradores 
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -81,11 +78,10 @@ A API deve responder com código 200 e listar usuários não administradores
 Realizar requisição para listar usuários por parâmetro id
     Create Session    ListarUsuarios      ${URL}      verify=true 
     &{HEADERS}        Create Dictionary   Content-Type=application/json
-    Set Test Variable    ${ID}    0uxuPY0cbmQhpEz1
+    # Set Test Variable    ${PARAM_ID}    ${ID}
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=_id=${ID}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários por parâmetro id
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -101,11 +97,9 @@ A API deve responder com código 200 e listar usuários por parâmetro id
 Realizar requisição para listar usuários por parâmetro nome
     Create Session    ListarUsuarios      ${URL}      verify=true 
     &{HEADERS}        Create Dictionary   Content-Type=application/json
-    Set Test Variable    ${NOME}    Fulano da Silva
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=nome=${NOME}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários por parâmetro nome
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -121,11 +115,9 @@ A API deve responder com código 200 e listar usuários por parâmetro nome
 Realizar requisição para listar usuários por parâmetro email
     Create Session    ListarUsuarios      ${URL}      verify=true 
     &{HEADERS}        Create Dictionary   Content-Type=application/json
-    Set Test Variable    ${EMAIL}    fulano@qa.com
     ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=email=${EMAIL}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários por parâmetro email
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
@@ -141,14 +133,13 @@ A API deve responder com código 200 e listar usuários por parâmetro email
 Realizar requisição para listar usuários por parâmetro senha
     Create Session    ListarUsuarios      ${URL}      verify=true 
     &{HEADERS}        Create Dictionary   Content-Type=application/json
-    ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=password=teste2
+    ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=password=${PASSWORD}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
-
 A API deve responder com código 200 e listar usuários por parâmetro senha
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
 
     FOR    ${DADOS}    IN   @{RESPONSE_BODY['usuarios']}
-        Should Be True  '${DADOS['password']}' == 'teste2'
+        Should Be True  '${DADOS['password']}' == '${PASSWORD}'
     END
