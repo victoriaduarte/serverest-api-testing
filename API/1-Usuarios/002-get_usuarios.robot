@@ -78,8 +78,7 @@ A API deve responder com código 200 e listar usuários não administradores
 Realizar requisição para listar usuários por parâmetro id
     Create Session    ListarUsuarios      ${URL}      verify=true 
     &{HEADERS}        Create Dictionary   Content-Type=application/json
-    # Set Test Variable    ${PARAM_ID}    ${ID}
-    ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=_id=${ID}
+    ${RESPONSE}       Get On Session      ListarUsuarios      ${URL}/usuarios      headers=${HEADERS}     params=_id=${ID_USUARIO}
     Set Test Variable      ${RESPONSE}    
     Set Test Variable      ${RESPONSE_BODY}      ${RESPONSE.json()}
 A API deve responder com código 200 e listar usuários por parâmetro id
@@ -87,10 +86,10 @@ A API deve responder com código 200 e listar usuários por parâmetro id
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
 
     IF  ${RESPONSE_BODY['quantidade']} == 0
-        Fail  msg=Usuário com id "${ID}" não encontrado
+        Fail  msg=Usuário com id "${ID_USUARIO}" não encontrado
     ELSE
         FOR    ${DADOS}    IN   @{RESPONSE_BODY['usuarios']}
-            Should Be True  '${DADOS['_id']}' == '${ID}'
+            Should Be True  '${DADOS['_id']}' == '${ID_USUARIO}'
         END
     END
 

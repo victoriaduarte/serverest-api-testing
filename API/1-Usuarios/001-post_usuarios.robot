@@ -35,7 +35,7 @@ Realizar requisição para cadastrar usuário administrador
     ${RESPONSE}      Post On Session     CadastrarUsuario    ${URL}/usuarios    data=${DATA}    headers=${HEADERS}
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
-    Set Global Variable	  ${ID}     ${RESPONSE_BODY['_id']}  
+    Set Global Variable	  ${ID_USUARIO}        ${RESPONSE_BODY['_id']}  
 A API deve responder com código 201 e cadastrar usuário
     Should Be True  '${RESPONSE.status_code}'=='201'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}

@@ -37,7 +37,7 @@ Realizar requisição para atualizar usuário cadastrado
     Create Session   AtualizarUsuario      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Atualizar usuário cadastrado
-    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID}    data=${DATA}    headers=${HEADERS}
+    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID_USUARIO}    data=${DATA}    headers=${HEADERS}
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
 A API deve responder com código 200 e atualizar o usuário
@@ -61,7 +61,7 @@ A API deve responder com código 201 e realizar novo cadastro
 Realizar requisição para atualizar usuário com email já utilizado
     Create Session   AtualizarUsuario      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
-    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID}    data=${DATA_EXISTENTE}    headers=${HEADERS}    expected_status=400
+    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID_USUARIO}    data=${DATA_EXISTENTE}    headers=${HEADERS}    expected_status=400
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
 A API deve responder com código 400 e informar que o email já está sendo usado
@@ -73,7 +73,7 @@ Realizar requisição para atualizar usuário com campos em branco
     Create Session   AtualizarUsuario      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Gerar usuário com campos em branco
-    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID}    data=${DATA}    headers=${HEADERS}    expected_status=400
+    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID_USUARIO}    data=${DATA}    headers=${HEADERS}    expected_status=400
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
 A API deve responder com código 400 e informar os campos em branco
@@ -85,7 +85,7 @@ Realizar requisição para atualizar usuário com body vazio
     Create Session   AtualizarUsuario      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Gerar usuário com body vazio
-    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID}    data=${DATA}    headers=${HEADERS}    expected_status=400
+    ${RESPONSE}      Put On Session     AtualizarUsuario    ${URL}/usuarios/${ID_USUARIO}    data=${DATA}    headers=${HEADERS}    expected_status=400
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
 A API deve responder com código 400 e informar os campos obrigatórios

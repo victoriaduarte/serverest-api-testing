@@ -28,7 +28,7 @@ Realizar requisição para deletar usuário cadastrado
     Create Session   DeletarUsuario      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Atualizar usuário cadastrado
-    ${RESPONSE}      Delete On Session     DeletarUsuario    ${URL}/usuarios/${ID}    headers=${HEADERS}
+    ${RESPONSE}      Delete On Session     DeletarUsuario    ${URL}/usuarios/${ID_USUARIO}    headers=${HEADERS}
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
 A API deve responder com código 200 e deletar o usuário

@@ -7,9 +7,6 @@ Library     Collections
 ${URL}      https://serverest.dev
 ${USER}     {"email": "fulano@qa.com", "password": "teste"}
 
-*** Test Cases ***
-Realizar login válido
-    Autenticar
 
 *** Keywords ***
 Autenticar    
@@ -18,5 +15,7 @@ Autenticar
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     ${RESPONSE}      Post On Session     Login    ${URL}/login    data=${USER}    headers=${HEADERS}
     Set Test Variable    ${RESPONSE_BODY}     ${RESPONSE.json()}
-    Set Test Variable    ${TOKEN}    ${RESPONSE_BODY['authorization']}
+    Set Test Variable   ${TOKEN}    ${RESPONSE_BODY['authorization']}
     Should Be True      '${RESPONSE_BODY['message']}' == 'Login realizado com sucesso'
+    &{AUTH}       Create Dictionary   Authorization=${TOKEN}    Content-Type=application/json
+    Set Test Variable   ${AUTH}  
