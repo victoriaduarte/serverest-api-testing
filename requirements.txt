@@ -1,0 +1,5 @@
+robotframework
+robotframework-seleniumlibrary
+robotframework-requests
+rpaframework
+robotframework-faker
