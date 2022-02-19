@@ -43,7 +43,6 @@ Realizar requisição para deletar usuário não cadastrado
     ${RESPONSE}      Delete On Session     DeletarUsuario    ${URL}/usuarios/${ID_NOVO}    headers=${HEADERS}
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
-    Set Suite Variable    ${DATA_EXISTENTE}    ${DATA}
 A API deve responder com código 200 e não deletar o usuário
     Should Be True  '${RESPONSE.status_code}'=='200'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}
