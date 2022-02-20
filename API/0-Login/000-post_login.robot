@@ -18,4 +18,4 @@ Autenticar
     Set Test Variable   ${TOKEN}    ${RESPONSE_BODY['authorization']}
     Should Be True      '${RESPONSE_BODY['message']}' == 'Login realizado com sucesso'
     &{AUTH}       Create Dictionary   Authorization=${TOKEN}    Content-Type=application/json
-    Set Test Variable   ${AUTH}  
+    Set Global Variable   ${AUTH}  

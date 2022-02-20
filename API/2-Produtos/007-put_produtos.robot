@@ -35,7 +35,7 @@ Atualizar produtos com body vazio
 
 *** Keywords ***
 Realizar requisição para atualizar produto cadastrado
-    Autenticar
+    # Autenticar
     Create Session   AtualizarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Atualizar produto cadastrado
@@ -48,7 +48,7 @@ A API deve responder com código 200 e atualizar o produto
     Should Be True  '${RESPONSE_BODY['message']}'=='Registro alterado com sucesso'
 
 Realizar requisição para atualizar produto não cadastrado
-    Autenticar
+    # Autenticar
     Create Session   AtualizarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Atualizar produto não cadastrado    
@@ -62,7 +62,7 @@ A API deve responder com código 201 e realizar novo cadastro
     Should Be True  '${RESPONSE_BODY['message']}'=='Cadastro realizado com sucesso'
 
 Realizar requisição para atualizar produto com nome já utilizado
-    Autenticar
+    # Autenticar
     Create Session   AtualizarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     ${RESPONSE}      Put On Session     AtualizarProduto    ${URL}/produtos/${ID_NOVO}    data=${DATA_EXISTENTE}    headers=${AUTH}    expected_status=400
@@ -74,7 +74,7 @@ A API deve responder com código 400 e informar que o nome já está sendo usado
     Should Be True  '${RESPONSE_BODY['message']}'=='Já existe produto com esse nome'
 
 Realizar requisição para atualizar produto com campos em branco
-    Autenticar
+    # Autenticar
     Create Session   AtualizarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Gerar produto com campos em branco
@@ -87,7 +87,7 @@ A API deve responder com código 400 e informar os campos em branco
     Should Be True  ${RESPONSE_BODY} == {'nome': 'nome não pode ficar em branco', 'preco': 'preco deve ser um número', 'descricao': 'descricao não pode ficar em branco', 'quantidade': 'quantidade deve ser um número'}
 
 Realizar requisição para atualizar produto com body vazio
-    Autenticar
+    # Autenticar
     Create Session   AtualizarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Gerar produto com body vazio
