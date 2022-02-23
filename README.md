@@ -8,12 +8,13 @@ https://serverest.dev/
 ## Endpoints
 - [x] Login
 - [x] Usuários
-- [ ] Produtos
+- [x] Produtos
 - [ ] Carrinhos
 
 ## Instalação
 
 - Instalar o Python
+- Instalar o driver do navegador e adicionar ao path nas variáveis de ambiente do sistema
 - Instalar as dependências do Robot Framework: `python -m pip install -r requirements.txt`
 
 ## Execução
