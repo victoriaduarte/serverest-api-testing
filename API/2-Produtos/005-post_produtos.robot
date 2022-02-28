@@ -6,8 +6,8 @@ Resource    Payload/produto_valido.robot
 
 
 *** Variables ***
-${URL}    https://serverest.dev
-
+${URL}          https://serverest.dev
+${USER_01}      {"email": "fulano@qa.com", "password": "teste"}
 
 *** Test Cases ***
 Cadastrar produto
@@ -17,7 +17,7 @@ Cadastrar produto
 
 *** Keywords ***
 Realizar requisição para cadastrar produto
-    Autenticar
+    Autenticar   ${USER_01} 
     Create Session   CadastrarProduto      ${URL}       verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json     
     Gerar produto
@@ -27,8 +27,8 @@ Realizar requisição para cadastrar produto
     Set Global Variable   ${QUANTIDADE}  ${QUANTIDADE}  
     ${RESPONSE}      Post On Session     CadastrarProduto    ${URL}/produtos    data=${DATA}    headers=${AUTH}
     Set Test Variable     ${RESPONSE}    
-    Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
-    Set Global Variable	  ${ID_PRODUTO}        ${RESPONSE_BODY['_id']}
+    Set Test Variable	  ${RESPONSE_BODY}   ${RESPONSE.json()}
+    Set Global Variable	  ${ID_PRODUTO}      ${RESPONSE_BODY['_id']}
 A API deve responder com código 201 e cadastrar produto
     Should Be True  '${RESPONSE.status_code}'=='201'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}

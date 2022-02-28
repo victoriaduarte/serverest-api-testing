@@ -5,11 +5,11 @@ Library     Collections
 
 *** Variables ***
 ${URL}      https://serverest.dev
-${USER}     {"email": "fulano@qa.com", "password": "teste"}
 
 
 *** Keywords ***
-Autenticar    
+Autenticar  
+    [Arguments]    ${USER}
 # A duração do token retornado em authorization é de 600 segundos (10 minutos)
     Create Session   Login      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json

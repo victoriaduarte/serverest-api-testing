@@ -56,6 +56,7 @@ Realizar requisição para atualizar produto não cadastrado
     Set Test Variable     ${RESPONSE}    
     Set Test Variable	  ${RESPONSE_BODY}     ${RESPONSE.json()}
     Set Suite Variable    ${DATA_EXISTENTE}    ${DATA}
+    Set Global Variable	  ${ID_PRODUTO_NOVO}        ${RESPONSE_BODY['_id']}
 A API deve responder com código 201 e realizar novo cadastro
     Should Be True  '${RESPONSE.status_code}'=='201'
     ...  msg=Erro na requisição! Verifique: ${RESPONSE}

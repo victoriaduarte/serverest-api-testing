@@ -7,7 +7,8 @@ Resource    Payload/produto_invalido.robot
 
 
 *** Variables ***
-${URL}    https://serverest.dev
+${URL}          https://serverest.dev
+${USER_01}      {"email": "fulano@qa.com", "password": "teste"}
 
 
 *** Test Cases ***
@@ -26,7 +27,7 @@ Deletar produto não cadastrado
 
 *** Keywords ***
 Realizar requisição para deletar produto cadastrado
-    Autenticar
+    Autenticar   ${USER_01} 
     Create Session   DeletarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     ${RESPONSE}      Delete On Session     DeletarProduto    ${URL}/produtos/${ID_PRODUTO}    headers=${AUTH}
@@ -38,7 +39,7 @@ A API deve responder com código 200 e deletar o produto
     Should Be True  '${RESPONSE_BODY['message']}'=='Registro excluído com sucesso'
 
 Realizar requisição para deletar produto não cadastrado
-    Autenticar
+    Autenticar   ${USER_01} 
     Create Session   DeletarProduto      ${URL}     verify=true 
     &{HEADERS}       Create Dictionary   Content-Type=application/json
     Atualizar produto não cadastrado    
