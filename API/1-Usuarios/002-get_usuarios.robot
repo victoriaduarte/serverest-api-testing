@@ -1,7 +1,5 @@
 *** Settings ***
 Library     RequestsLibrary
-Library     Collections
-
 
 *** Variables ***
 ${URL}    https://serverest.dev

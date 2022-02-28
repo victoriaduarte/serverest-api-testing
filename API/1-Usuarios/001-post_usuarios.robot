@@ -1,6 +1,5 @@
 *** Settings ***
 Library     RequestsLibrary
-Library     Collections
 Resource    Payload/usuario_valido.robot
 
 

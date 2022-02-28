@@ -1,6 +1,5 @@
 *** Settings ***
 Library     RequestsLibrary
-Library     Collections
 Resource    ../0-Login/000-post_login.robot
 Resource    Payload/produto_valido.robot
 Resource    Payload/produto_invalido.robot
